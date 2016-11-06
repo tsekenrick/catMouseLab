@@ -23,7 +23,7 @@ public class mouse : MonoBehaviour {
             playTimer += Time.deltaTime;
         }
 	
-    if (playTimer >= 5)
+    if (playTimer >= 3)
         {
             hasPlayed = false;
             playTimer = 0;
@@ -38,7 +38,7 @@ public class mouse : MonoBehaviour {
             Ray mouseRay = new Ray(transform.position, directionToCat);
             Debug.DrawRay(transform.position, directionToCat, Color.yellow);
             RaycastHit mouseRayHitInfo;
-            if (Physics.Raycast(mouseRay, out mouseRayHitInfo, 50f))
+            if (Physics.Raycast(mouseRay, out mouseRayHitInfo, 100f))
             {               
                 if (mouseRayHitInfo.collider.tag == "Cat")
                 {
@@ -48,7 +48,7 @@ public class mouse : MonoBehaviour {
                         hasPlayed = true;
                     }
                     Debug.Log("running!");
-                    rb.AddForce(-directionToCat.normalized * 1250f);
+                    rb.AddForce(-directionToCat.normalized * 1500f);
                 }
                 
             }

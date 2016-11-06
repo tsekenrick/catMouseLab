@@ -22,7 +22,7 @@ public class cat : MonoBehaviour
             playTimer += Time.deltaTime;
         }
 
-        if (playTimer >= 5)
+        if (playTimer >= 3)
         {
             hasPlayed = false;
             playTimer = 0;
@@ -42,11 +42,11 @@ public class cat : MonoBehaviour
         {
             Ray catRay = new Ray(transform.position, directionToMouse);
             RaycastHit catRayHitInfo;
-            if (Physics.Raycast(catRay, out catRayHitInfo, 100f))
+            if (Physics.Raycast(catRay, out catRayHitInfo, 7.5f))
             {
                 if (catRayHitInfo.collider.tag == "Mouse")
                 {
-                    if (catRayHitInfo.distance <= 2.5f)
+                    if (catRayHitInfo.distance <= 1.5f)
                     {
                         sources[0].Play();
                         Debug.Log("mouse caught");
@@ -55,11 +55,11 @@ public class cat : MonoBehaviour
                     }
                     else
                     {
+                        Debug.Log("chasing mouse");
+                        rb.AddForce(directionToMouse.normalized * 1000f);
                         if (hasPlayed == false)
                         {
-                            sources[1].Play();
-                            Debug.Log("chasing mouse");
-                            rb.AddForce(directionToMouse.normalized * 1000f);
+                            sources[1].Play();                            
                             hasPlayed = true;
                         }
                     }
